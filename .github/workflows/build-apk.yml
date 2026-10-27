@@ -1,0 +1,64 @@
+name: Build & Release Chotu AI APK
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Chotu AI APK
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Grant Execute Permission to gradlew
+        run: chmod +x gradlew
+
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug --stacktrace
+
+      - name: Prepare Release Asset
+        run: |
+          mkdir -p release-assets
+          cp app/build/outputs/apk/debug/app-debug.apk release-assets/Chotu-AI-${{ github.ref_name || 'latest' }}.apk
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: chotu-ai-apk
+          path: release-assets/*.apk
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: release-assets/*.apk
+          generate_release_notes: true
+          name: Chotu AI ${{ github.ref_name }} 📱
+          body: |
+            ## 📱 Chotu AI (ছোটু) — Android Release
+            Your autonomous pocket runner is ready!
+
+            ### 🚀 What can Chotu do?
+            - Order food autonomously on Zomato / Swiggy
+            - Tap, scroll, and type across any Android app
+            - Powered by free Google Gemini 1.5 Flash and Groq API keys
+            - 100% on-device via Android Accessibility Service (Zero root required)
+
+            **Download the APK below and grant Accessibility permission to start!**
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
