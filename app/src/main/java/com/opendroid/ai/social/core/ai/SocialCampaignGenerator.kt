@@ -155,7 +155,7 @@ class SocialCampaignGenerator @Inject constructor(
                 id = UUID.randomUUID().toString(),
                 accountId = "pending",
                 platform = SocialPlatform.X,
-                content = "🚀 Introducing $name! $objective. Experience autonomous AI device workflows right from your phone. #OpenDroid #AndroidDev",
+                content = "🚀 Introducing $name! $objective. Experience autonomous AI device workflows right from your phone. #ChotuAI #AndroidDev",
                 status = PostStatus.DRAFT,
                 scheduledPublishTime = startDate + 3600_000L * 2,
                 campaignId = campaignId,

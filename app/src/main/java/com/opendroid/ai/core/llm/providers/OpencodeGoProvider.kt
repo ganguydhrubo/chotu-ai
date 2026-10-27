@@ -172,7 +172,7 @@ internal object OpencodeGoProtocol {
      */
     val sessionId: String by lazy { newSessionId() }
 
-    fun userAgent(): String = "OpenDroid/${BuildConfig.VERSION_NAME}"
+    fun userAgent(): String = "ChotuAI/${BuildConfig.VERSION_NAME}"
 
     fun headers(apiKey: String): Map<String, String> = mapOf(
         "Authorization" to "Bearer $apiKey",

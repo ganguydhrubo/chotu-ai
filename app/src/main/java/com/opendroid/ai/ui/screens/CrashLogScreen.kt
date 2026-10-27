@@ -55,7 +55,7 @@ fun CrashLogScreen(
     fun share(text: String) {
         val intent = Intent(Intent.ACTION_SEND).apply {
             type = "text/plain"
-            putExtra(Intent.EXTRA_SUBJECT, "OpenDroid crash report")
+            putExtra(Intent.EXTRA_SUBJECT, "Chotu AI crash report")
             putExtra(Intent.EXTRA_TEXT, text)
         }
         context.startActivity(Intent.createChooser(intent, "Share crash report"))
@@ -63,7 +63,7 @@ fun CrashLogScreen(
 
     fun copy(text: String) {
         val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        clipboard.setPrimaryClip(ClipData.newPlainText("OpenDroid crash report", text))
+        clipboard.setPrimaryClip(ClipData.newPlainText("Chotu AI crash report", text))
         // Android 13+ shows its own copy confirmation; a Toast there would double up.
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
             Toast.makeText(context, "Crash report copied", Toast.LENGTH_SHORT).show()

@@ -10,6 +10,9 @@ import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import java.util.Locale
 
+/** Ways the speech recogniser may write "Hey Chotu". */
+private val WAKE_WORDS = listOf("chotu", "chhotu", "chotoo", "choto", "ছোটু", "छोटू")
+
 class WakeWordDetector(private val context: Context) {
 
     private var speechRecognizer: SpeechRecognizer? = null
@@ -75,7 +78,7 @@ class WakeWordDetector(private val context: Context) {
                 val matches = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
                 if (matches != null) {
                     for (match in matches) {
-                        if (match.contains("opendroid", ignoreCase = true) || match.contains("open droid", ignoreCase = true)) {
+                        if (WAKE_WORDS.any { match.contains(it, ignoreCase = true) }) {
                             triggerWakeWord()
                             break
                         }
@@ -88,7 +91,7 @@ class WakeWordDetector(private val context: Context) {
                 val matches = partialResults?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
                 if (matches != null) {
                     for (match in matches) {
-                        if (match.contains("opendroid", ignoreCase = true) || match.contains("open droid", ignoreCase = true)) {
+                        if (WAKE_WORDS.any { match.contains(it, ignoreCase = true) }) {
                             triggerWakeWord()
                             break
                         }

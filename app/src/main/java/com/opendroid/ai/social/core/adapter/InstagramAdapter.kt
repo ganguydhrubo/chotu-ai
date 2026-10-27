@@ -32,7 +32,7 @@ class InstagramAdapter @Inject constructor(
                 SocialAccountInfo(
                     id = "ig_${credentials.accountId.ifBlank { "opendroid.app" }}",
                     username = "opendroid.app",
-                    displayName = "OpenDroid AI Assistant",
+                    displayName = "Chotu AI AI Assistant",
                     avatarUrl = null,
                     grantedPermissions = supportedPermissions
                 )
@@ -70,7 +70,7 @@ class InstagramAdapter @Inject constructor(
         }
 
         val igUserId = credentials.accountId
-        val mediaUrl = post.mediaUrls.firstOrNull() ?: "https://opendroid.ai/assets/logo.png"
+        val mediaUrl = post.mediaUrls.firstOrNull() ?: "https://sahkarmi.site/assets/icon-512.png"
 
         // 1. Create Media Container
         val containerPayload = JSONObject().apply {
