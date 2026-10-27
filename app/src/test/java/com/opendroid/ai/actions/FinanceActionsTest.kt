@@ -91,7 +91,7 @@ class FinanceActionsTest {
         assertEquals(Intent.ACTION_VIEW, context.startedIntent?.action)
         assertNull(context.startedIntent?.`package`)
         assertEquals(
-            "upi://pay?pa=alice@upi&pn=Recipient&tn=Sent+via+OpenDroid&am=100&cu=INR",
+            "upi://pay?pa=alice@upi&pn=Recipient&tn=Sent+via+Chotu+AI&am=100&cu=INR",
             context.startedIntent?.dataString
         )
     }
@@ -276,7 +276,7 @@ class FinanceActionsTest {
         app: String = "gpay",
         to: String = "alice@upi",
         amount: String = "100",
-        note: String = "Sent via OpenDroid"
+        note: String = "Sent via Chotu AI"
     ) = paymentAction().execute(
         mapOf("to" to to, "amount" to amount, "note" to note, "app" to app),
         context
